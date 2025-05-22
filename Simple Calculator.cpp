@@ -1,73 +1,99 @@
 ﻿#include <iostream>
 
+// Displays the welcome message
+void printWelcome() {
+    std::cout << "Welcome to my Calculator\n";
+}
+
+// Displays the menu of operations
+void printMenu() {
+    std::cout << "Which operation do you want to use?\n";
+    std::cout << "1. Addition\n";
+    std::cout << "2. Subtraction\n";
+    std::cout << "3. Multiplication\n";
+    std::cout << "4. Division\n";
+}
+
+// Displays a message for a wrong option
+void printWrongOption() {
+    std::cout << "You chose a wrong option\n";
+}
+
+// Displays the result
+void printResult(double answer) {
+    std::cout << "Your answer is: " << answer << std::endl;
+}
+
+// Displays division by zero error
+void printDivisionByZero() {
+    std::cout << "You can't divide by zero" << std::endl;
+}
+
+// Asks if the user wants to continue
+void askContinue(char& continueCalc) {
+    std::cout << "Do you want to continue? (y/n): ";
+    std::cin >> continueCalc;
+}
+
+// Gets a number from the user with a prompt
+void getNumber(const char* prompt, double& number) {
+    std::cout << prompt;
+    std::cin >> number;
+}
+
 int main()
 {
     int choice;
     double answer;
     double number1;
     double number2;
-    char kontynuuj;
-    std::cout << "Welcome in my Calculator\n";
+    char continueCalc;
+    printWelcome();
     do {
-        std::cout << "What operation do you want to use?\n";
-        std::cout << "1. Adding\n";
-        std::cout << "2. Subtraction\n";
-        std::cout << "3. Multiplication\n";
-        std::cout << "4. Divide\n";
-
+        printMenu();
         std::cin >> choice;
 
         switch (choice) {
         case 1:
-            std::cout << "You chose adding\n";
-            std::cout << "State the first number: \n";
-            std::cin >> number1;
-            std::cout << "State the second number: \n";
-            std::cin >> number2; 
+            std::cout << "You chose addition\n";
+            getNumber("Enter the first number: \n", number1);
+            getNumber("Enter the second number: \n", number2);
             answer = number1 + number2;
-            std::cout << "Your answer is: " << answer << std::endl;
+            printResult(answer);
             break;
-
         case 2:
             std::cout << "You chose subtraction\n";
-            std::cout << "State the first number: \n";
-            std::cin >> number1;
-            std::cout << "State the second number: \n";
-            std::cin >> number2;
+            getNumber("Enter the first number: \n", number1);
+            getNumber("Enter the second number: \n", number2);
             answer = number1 - number2;
-            std::cout << "Your answer is: " << answer << std::endl;
+            printResult(answer);
             break;
         case 3:
             std::cout << "You chose multiplication\n";
-            std::cout << "State the first number: \n";
-            std::cin >> number1;
-            std::cout << "State the second number: \n";
-            std::cin >> number2;
+            getNumber("Enter the first number: \n", number1);
+            getNumber("Enter the second number: \n", number2);
             answer = number1 * number2;
-            std::cout << "Your answer is: " << answer << std::endl;
+            printResult(answer);
             break;
         case 4:
-            std::cout << "You chose divide\n";
-            std::cout << "State the first number: \n";
-            std::cin >> number1;
-            std::cout << "State the second number: \n";
-            std::cin >> number2;
+            std::cout << "You chose division\n";
+            getNumber("Enter the first number: \n", number1);
+            getNumber("Enter the second number: \n", number2);
             if (number2 == 0) {
-                std::cout << "You can't divide by zero" << std::endl;
+                printDivisionByZero();
             }
             else {
                 answer = number1 / number2;
-                std::cout << "Your answer is: " << answer << std::endl;
+                printResult(answer);
             }
             break;
         default:
-            std::cout << "You chose wrong option\n";
+            printWrongOption();
             break;
         }
 
-        std::cout << "Do you want to continue? (t/n): ";
-        std::cin >> kontynuuj;
-    } while (kontynuuj == 't' || kontynuuj == 'T');
+        askContinue(continueCalc);
+    } while (continueCalc == 'y' || continueCalc == 'Y');
 }
 
 
